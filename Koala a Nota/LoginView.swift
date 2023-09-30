@@ -19,12 +19,12 @@ struct LoginView: View {
                     Spacer()
                     Image("logo")
                         .resizable()
-                        .frame(width: 250, height: 250)
+                        .frame(width: 180, height: 180)
                     Spacer()
                     ZStack {
                         Color.white.ignoresSafeArea()
                         VStack {
-                            Text("Entre com seu Login")
+                            Text("Entre na sua conta")
                                 .font(.title)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.bottom, 30)
@@ -69,7 +69,7 @@ struct LoginView: View {
                                     Text("Não possui uma conta?")
                                         .font(.caption)
                                         .foregroundColor(.black)
-                                    Text("Crie")
+                                    Text("Cadastre-se!")
                                         .font(.callout)
                                         .foregroundColor(.blue)
                                 }

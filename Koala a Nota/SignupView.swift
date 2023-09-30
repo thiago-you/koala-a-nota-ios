@@ -19,7 +19,7 @@ struct SignupView: View {
                     Spacer()
                     Image("logo")
                         .resizable()
-                        .frame(width: 250, height: 250)
+                        .frame(width: 180, height: 180)
                     Spacer()
                     ZStack {
                         Color.white.ignoresSafeArea()
@@ -37,11 +37,6 @@ struct SignupView: View {
                             HStack {
                                 Text("Senha:")
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                Spacer()
-                                Button("Recuperar Senha") {
-                                    
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                             SecureField("Digite sua senha...", text: $senha)
                                 .padding(.all)
