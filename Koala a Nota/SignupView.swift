@@ -17,7 +17,7 @@ struct SignupView: View {
             ZStack {
                 VStack {
                     Spacer()
-                    Image("logo")
+                    Image("profile")
                         .resizable()
                         .frame(width: 180, height: 180)
                     Spacer()

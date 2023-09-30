@@ -11,7 +11,7 @@ struct ItemReview: Identifiable {
     let id = UUID()
     let title: String
     let owner: String
-    let rating: Integer
+    let rating: Int
     let review: String
-    let type: Integer
+    let type: Int
 }
