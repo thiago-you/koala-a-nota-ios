@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct ItemReview: Identifiable {
+    let id = UUID()
+    let title: String
+    let owner: String
+    let rating: Integer
+    let review: String
+    let type: Integer
+}
