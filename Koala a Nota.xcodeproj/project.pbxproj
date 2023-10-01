@@ -16,6 +16,7 @@
 		C3B5BCCD2AC8C10600FC2D34 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCCC2AC8C10600FC2D34 /* LoginView.swift */; };
 		C3B5BCD02AC8C7AD00FC2D34 /* ItemReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCCF2AC8C7AD00FC2D34 /* ItemReview.swift */; };
 		C3B5BCD22AC8C7C300FC2D34 /* ItemReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCD12AC8C7C300FC2D34 /* ItemReviewModel.swift */; };
+		C3C5F9332AC9B444003B4082 /* ItemReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C5F9322AC9B444003B4082 /* ItemReviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		C3B5BCCC2AC8C10600FC2D34 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C3B5BCCF2AC8C7AD00FC2D34 /* ItemReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReview.swift; sourceTree = "<group>"; };
 		C3B5BCD12AC8C7C300FC2D34 /* ItemReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReviewModel.swift; sourceTree = "<group>"; };
+		C3C5F9322AC9B444003B4082 /* ItemReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				C3B5BCC82AC8BCCE00FC2D34 /* SignupView.swift */,
 				C3B5BCCA2AC8BD0700FC2D34 /* HomeView.swift */,
 				C3B5BCCC2AC8C10600FC2D34 /* LoginView.swift */,
+				C3C5F9322AC9B444003B4082 /* ItemReviewView.swift */,
 			);
 			path = "Koala a Nota";
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				C3B5BCD02AC8C7AD00FC2D34 /* ItemReview.swift in Sources */,
 				C3B5BCD22AC8C7C300FC2D34 /* ItemReviewModel.swift in Sources */,
 				C3B5BCC92AC8BCCE00FC2D34 /* SignupView.swift in Sources */,
+				C3C5F9332AC9B444003B4082 /* ItemReviewView.swift in Sources */,
 				C3B5BCCB2AC8BD0700FC2D34 /* HomeView.swift in Sources */,
 				C3B5BCBD2AC8BC9300FC2D34 /* ContentView.swift in Sources */,
 				C3B5BCCD2AC8C10600FC2D34 /* LoginView.swift in Sources */,
