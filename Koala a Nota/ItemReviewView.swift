@@ -16,49 +16,47 @@ struct ItemReviewView: View {
     @State private var rating = 5
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                Text("Titulo:")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField("Informe o titulo...", text: $title)
-                    .padding(.all)
-                    .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                    .padding(.bottom, 20)
-                Text("Lugar:")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField("Informe o lugar...", text: $title)
-                    .padding(.all)
-                    .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                    .padding(.bottom, 20)
-                Text("Nota:")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField("Qual a nota...", text: $title)
-                    .padding(.all)
-                    .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                    .padding(.bottom, 20)
-                Text("Avaliacao:")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField("Escreva a avaliacao...", text: $title)
-                    .padding(.all)
-                    .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                    .padding(.bottom, 20)
-                Spacer()
-                Button {
-                    dismiss()
-                    
-                } label: {
-                    Image(systemName: "sdcard.fill")
-                        .foregroundColor(Color.white)
-                    Text("Salvar")
-                }
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color("materialGreen"))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+        VStack {
+            Text("Titulo:")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            TextField("Informe o titulo...", text: $title)
+                .padding(.all)
+                .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
+                .padding(.bottom, 20)
+            Text("Lugar:")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            TextField("Informe o lugar...", text: $title)
+                .padding(.all)
+                .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
+                .padding(.bottom, 20)
+            Text("Nota:")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            TextField("Qual a nota...", text: $title)
+                .padding(.all)
+                .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
+                .padding(.bottom, 20)
+            Text("Avaliacao:")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            TextField("Escreva a avaliacao...", text: $title)
+                .padding(.all)
+                .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
+                .padding(.bottom, 20)
+            Spacer()
+            Button {
+                dismiss()
+                
+            } label: {
+                Image(systemName: "sdcard.fill")
+                    .foregroundColor(Color.white)
+                Text("Salvar")
             }
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.white)
             .padding()
+            .background(Color("materialGreen"))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
         }
+        .padding()
     }
 }
 
