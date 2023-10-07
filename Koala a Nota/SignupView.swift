@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignupView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @State private var email = ""
     @State private var senha = ""
     @State private var rememberPassword = true
@@ -51,8 +53,8 @@ struct SignupView: View {
                                     Toggle("", isOn: $rememberPassword)
                                 }
                                 .padding(.bottom, 30)
-                                NavigationLink(destination: LoginView()) {
-                                    Text("Criar conta")
+                                Button("Criar conta") {
+                                    dismiss()
                                 }
                                 .frame(maxWidth: .infinity)
                                 .foregroundColor(.white)
@@ -60,7 +62,7 @@ struct SignupView: View {
                                 .background(Color("darkerPurple"))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .padding(.bottom, 10)
-                                NavigationLink(destination: LoginView()) {
+                                Button(action: { dismiss() }) {
                                     HStack {
                                         Text("Ja possui uma conta?")
                                             .font(.caption)
@@ -70,7 +72,6 @@ struct SignupView: View {
                                             .foregroundColor(.blue)
                                     }
                                 }
-                                .navigationTitle("Sign In")
                                 .padding(.bottom, 10)
                             }
                             .padding()

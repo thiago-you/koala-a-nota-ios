@@ -11,83 +11,88 @@ struct LoginView: View {
     @State private var email = ""
     @State private var senha = ""
     @State private var rememberPassword = true
+    @State private var gotoHome = false
     
     var body: some View {
-        NavigationView {
-            GeometryReader { reader in
-                ZStack {
-                    VStack {
-                        Spacer()
-                        Image("profile")
-                            .resizable()
-                            .frame(width: 180, height: 180)
-                        Spacer()
-                        ZStack {
-                            Color.white.ignoresSafeArea()
-                            VStack {
-                                Text("Entre na sua conta")
-                                    .font(.title)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.bottom, 30)
-                                Text("E-mail:")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                TextField("Digite seu e-mail...", text: $email)
-                                    .padding(.all)
-                                    .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                                    .padding(.bottom, 20)
-                                HStack {
-                                    Text("Senha:")
+        if gotoHome {
+            HomeView()
+        } else {
+            NavigationView {
+                GeometryReader { reader in
+                    ZStack {
+                        VStack {
+                            Spacer()
+                            Image("profile")
+                                .resizable()
+                                .frame(width: 180, height: 180)
+                            Spacer()
+                            ZStack {
+                                Color.white.ignoresSafeArea()
+                                VStack {
+                                    Text("Entre na sua conta")
+                                        .font(.title)
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                    Spacer()
-                                    Button("Recuperar Senha") {
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                }
-                                SecureField("Digite sua senha...", text: $senha)
-                                    .padding(.all)
-                                    .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                                    .padding(.bottom, 20)
-                                HStack {
-                                    Text("Lembrar minha senha")
-                                        .font(.caption)
+                                        .padding(.bottom, 30)
+                                    Text("E-mail:")
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                    Spacer()
-                                    Toggle("", isOn: $rememberPassword)
-                                }
-                                .padding(.bottom, 30)
-                                NavigationLink(destination: HomeView()) {
-                                    Text("Entrar")
-                                }
-                                .navigationTitle("Home")
-                                .frame(maxWidth: .infinity)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color("darkerPurple"))
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .padding(.bottom, 10)
-                                NavigationLink(destination: SignupView()) {
+                                    TextField("Digite seu e-mail...", text: $email)
+                                        .padding(.all)
+                                        .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
+                                        .padding(.bottom, 20)
                                     HStack {
-                                        Text("Não possui uma conta?")
-                                            .font(.caption)
-                                            .foregroundColor(.black)
-                                        Text("Cadastre-se!")
-                                            .font(.callout)
-                                            .foregroundColor(.blue)
+                                        Text("Senha:")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Spacer()
+                                        Button("Recuperar Senha") {
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
                                     }
+                                    SecureField("Digite sua senha...", text: $senha)
+                                        .padding(.all)
+                                        .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
+                                        .padding(.bottom, 20)
+                                    HStack {
+                                        Text("Lembrar minha senha")
+                                            .font(.caption)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Spacer()
+                                        Toggle("", isOn: $rememberPassword)
+                                    }
+                                    .padding(.bottom, 30)
+                                    Button(action: { gotoHome = true }) {
+                                        Text("Entrar")
+                                    }
+                                    .navigationTitle("Sign In")
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color("darkerPurple"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .padding(.bottom, 10)
+                                    NavigationLink(destination: SignupView()) {
+                                        HStack {
+                                            Text("Não possui uma conta?")
+                                                .font(.caption)
+                                                .foregroundColor(.black)
+                                            Text("Cadastre-se!")
+                                                .font(.callout)
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                    .navigationTitle("Sign In")
+                                    .padding(.bottom, 10)
                                 }
-                                .navigationTitle("Sign Up")
-                                .padding(.bottom, 10)
+                                .padding()
                             }
-                            .padding()
+                            .fixedSize(horizontal: false, vertical: true)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
-                        .fixedSize(horizontal: false, vertical: true)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .frame(minHeight: reader.size.height)
+                        .background(
+                            LinearGradient(gradient: Gradient(colors: [Color("darkerPurple"), Color("darkPurple"), .white]), startPoint: .top, endPoint: .bottom)
+                        )
                     }
-                    .frame(minHeight: reader.size.height)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [Color("darkerPurple"), Color("darkPurple"), .white]), startPoint: .top, endPoint: .bottom)
-                    )
                 }
             }
         }

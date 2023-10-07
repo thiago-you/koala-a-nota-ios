@@ -81,7 +81,7 @@ struct HomeView: View {
             Spacer()
             HStack {
                 Spacer()
-                NavigationLink(action: { ItemReviewView() }) {
+                NavigationLink(destination: ItemReviewView()) {
                     Image(systemName: "plus")
                         .resizable()
                         .foregroundColor(Color.white)
