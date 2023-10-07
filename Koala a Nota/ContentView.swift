@@ -7,9 +7,20 @@
 
 import SwiftUI
 
+class UserStatus: ObservableObject {
+    @Published var isLogged: Bool?
+}
+
 struct ContentView: View {
+    @EnvironmentObject private var user: UserStatus
+    
     var body: some View {
-        LoginView()
+        if user.isLogged == true {
+            HomeView()
+                .transition(AnyTransition.slide.animation(.easeInOut(duration: 1)))
+        } else {
+            LoginView()
+        }
     }
 }
 

@@ -6,9 +6,18 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct HomeView: View {
     let dataModel = ItemReviewModel()
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -20,6 +29,12 @@ struct HomeView: View {
             }
             .navigationTitle("Home")
             .toolbar {
+                ToolbarItem {
+                    Button(action: { logout() }) {
+                        Label("Sair", systemImage: "plus")
+                            .foregroundColor(.black)
+                    }
+                }
                 ToolbarItem {
                     NavigationLink(destination: ItemReviewView()) {
                         Label("Nova Avaliação", systemImage: "plus")

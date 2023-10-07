@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignupView: View {
     @Environment(\.dismiss) private var dismiss
@@ -13,6 +14,16 @@ struct SignupView: View {
     @State private var email = ""
     @State private var senha = ""
     @State private var rememberPassword = true
+    
+    func signUp() {
+        Auth.auth().createUser(withEmail: email, password: senha) { authResult, error in
+            if error == nil {
+                dismiss()
+            } else {
+                print(error ?? "Error")
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -54,7 +65,7 @@ struct SignupView: View {
                                 }
                                 .padding(.bottom, 30)
                                 Button("Criar conta") {
-                                    dismiss()
+                                    signUp()
                                 }
                                 .frame(maxWidth: .infinity)
                                 .foregroundColor(.white)
