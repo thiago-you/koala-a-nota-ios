@@ -11,12 +11,14 @@ struct HomeView: View {
     let dataModel = ItemReviewModel()
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                headerView
-                listView
+        NavigationView {
+            ZStack {
+                ScrollView(showsIndicators: false) {
+                    headerView
+                    listView
+                }
+                addButton
             }
-            addButton
         }
     }
     
@@ -79,7 +81,7 @@ struct HomeView: View {
             Spacer()
             HStack {
                 Spacer()
-                Button(action: {}) {
+                NavigationLink(action: { ItemReviewView() }) {
                     Image(systemName: "plus")
                         .resizable()
                         .foregroundColor(Color.white)
