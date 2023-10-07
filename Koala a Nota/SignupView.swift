@@ -11,16 +11,23 @@ import FirebaseAuth
 struct SignupView: View {
     @Environment(\.dismiss) private var dismiss
     
+    @State private var viewError: Any = ""
+    
     @State private var email = ""
     @State private var senha = ""
     @State private var rememberPassword = true
     
     func signUp() {
+        if email.isEmpty || senha.isEmpty {
+            viewError = "Por favor, verifique os dados informados!"
+            return
+        }
+        
         Auth.auth().createUser(withEmail: email, password: senha) { authResult, error in
             if error == nil {
                 dismiss()
             } else {
-                print(error ?? "Error")
+                viewError = "Nao foi possivel realizar o cadastro!"
             }
         }
     }
@@ -42,9 +49,22 @@ struct SignupView: View {
                                     .font(.title)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.bottom, 30)
+                                
+                                if viewError as! String != "" {
+                                    Text(viewError as! String)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .foregroundColor(.red)
+                                        .padding(.bottom, 15)
+                                } else {
+                                    Text("")
+                                        .padding(.bottom, 30)
+                                }
+                                
                                 Text("E-mail:")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 TextField("Digite seu e-mail...", text: $email)
+                                    .keyboardType(.emailAddress)
+                                    .autocapitalization(.none)
                                     .padding(.all)
                                     .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
                                     .padding(.bottom, 20)

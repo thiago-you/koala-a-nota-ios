@@ -9,14 +9,21 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
+    @State private var viewError: Any = ""
+    
     @State private var email = ""
     @State private var senha = ""
     @State private var rememberPassword = true
     
     func signIn() {
+        if email.isEmpty || senha.isEmpty {
+            viewError = "Por favor, verifique os dados informados!"
+            return
+        }
+        
         Auth.auth().signIn(withEmail: email, password: senha) { authResult, error in
             if error != nil {
-                print(error ?? "Error")
+                viewError = "O login informado nao e valido!"
             }
         }
     }
@@ -38,9 +45,22 @@ struct LoginView: View {
                                     .font(.title)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.bottom, 30)
+                                
+                                if viewError as! String != "" {
+                                    Text(viewError as! String)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .foregroundColor(.red)
+                                        .padding(.bottom, 15)
+                                } else {
+                                    Text("")
+                                        .padding(.bottom, 30)
+                                }
+                                
                                 Text("E-mail:")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 TextField("Digite seu e-mail...", text: $email)
+                                    .keyboardType(.emailAddress)
+                                    .autocapitalization(.none)
                                     .padding(.all)
                                     .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
                                     .padding(.bottom, 20)
@@ -84,7 +104,7 @@ struct LoginView: View {
                                             .foregroundColor(.blue)
                                     }
                                 }
-                                .navigationTitle("Sign In")
+                                .navigationTitle("Login")
                                 .padding(.bottom, 10)
                             }
                             .padding()

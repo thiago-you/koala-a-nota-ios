@@ -30,12 +30,6 @@ struct HomeView: View {
             .navigationTitle("Home")
             .toolbar {
                 ToolbarItem {
-                    Button(action: { logout() }) {
-                        Label("Sair", systemImage: "plus")
-                            .foregroundColor(.black)
-                    }
-                }
-                ToolbarItem {
                     NavigationLink(destination: ItemReviewView()) {
                         Label("Nova Avaliação", systemImage: "plus")
                             .foregroundColor(.black)
@@ -47,18 +41,24 @@ struct HomeView: View {
     
     var headerView: some View {
         HStack {
-            Image("profile")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .padding(.all, 10)
-                .background(
-                    LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .top, endPoint: .bottom)
-                )
-                .clipShape(Circle())
+            VStack {
+                Image("profile")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .padding(.all, 10)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .top, endPoint: .bottom)
+                    )
+                    .clipShape(Circle())
+                Button("Sair", action: { logout() })
+                    .bold()
+                    .foregroundColor(.black)
+            }
             Spacer()
         }
         .frame(height: 50)
         .padding()
+        .padding(.top, 20)
     }
     
     var listView: some View {
