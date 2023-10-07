@@ -15,6 +15,8 @@ struct ItemReviewView: View {
     @State private var review = ""
     @State private var rating = 5
     
+    @State private var isNewItem = false
+
     var body: some View {
         VStack {
             Text("Titulo:")
@@ -55,6 +57,16 @@ struct ItemReviewView: View {
             .padding()
             .background(Color("materialGreen"))
             .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+        .toolbar {
+            if !isNewItem {
+                ToolbarItem {
+                    NavigationLink(destination: ItemReviewView()) {
+                        Label("Deletar Avaliação", systemImage: "trash")
+                            .foregroundColor(.black)
+                    }
+                }
+            }
         }
         .padding()
     }

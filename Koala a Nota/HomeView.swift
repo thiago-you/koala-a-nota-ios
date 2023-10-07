@@ -22,7 +22,7 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem {
                     NavigationLink(destination: ItemReviewView()) {
-                        Label("Nova Avaliacao", systemImage: "plus")
+                        Label("Nova Avaliação", systemImage: "plus")
                             .foregroundColor(.black)
                     }
                 }
