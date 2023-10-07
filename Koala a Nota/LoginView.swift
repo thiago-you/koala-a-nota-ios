@@ -16,6 +16,7 @@ struct LoginView: View {
     var body: some View {
         if gotoHome {
             HomeView()
+                .transition(AnyTransition.slide.animation(.easeInOut(duration: 1)))
         } else {
             NavigationView {
                 GeometryReader { reader in
@@ -63,7 +64,6 @@ struct LoginView: View {
                                     Button(action: { gotoHome = true }) {
                                         Text("Entrar")
                                     }
-                                    .navigationTitle("Sign In")
                                     .frame(maxWidth: .infinity)
                                     .foregroundColor(.white)
                                     .padding()

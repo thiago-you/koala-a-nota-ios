@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ItemReviewView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @State private var title = ""
     @State private var owner = ""
     @State private var review = ""
@@ -41,23 +43,21 @@ struct ItemReviewView: View {
                     .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
                     .padding(.bottom, 20)
                 Spacer()
-                HStack {
-                    Spacer()
-                    NavigationLink(destination: HomeView()) {
-                        Image(systemName: "sdcard.fill")
-                            .resizable()
-                            .foregroundColor(Color.white)
-                            .frame(width: 20, height: 20)
-                            
-                    }
-                    .navigationTitle("Home")
-                    .padding(.all, 20)
-                    .background(Color("materialGreen"))
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                Button {
+                    dismiss()
+                    
+                } label: {
+                    Image(systemName: "sdcard.fill")
+                        .foregroundColor(Color.white)
+                    Text("Salvar")
                 }
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color("materialGreen"))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             .padding()
-            .padding(.top, 50)
         }
     }
 }

@@ -17,7 +17,15 @@ struct HomeView: View {
                     headerView
                     listView
                 }
-                addButton
+            }
+            .navigationTitle("Home")
+            .toolbar {
+                ToolbarItem {
+                    NavigationLink(destination: ItemReviewView()) {
+                        Label("Nova Avaliacao", systemImage: "plus")
+                            .foregroundColor(.black)
+                    }
+                }
             }
         }
     }
@@ -74,26 +82,6 @@ struct HomeView: View {
         }
         .padding()
         .background(Color.white)
-    }
-    
-    var addButton: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-                NavigationLink(destination: ItemReviewView()) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .foregroundColor(Color.white)
-                        .frame(width: 20, height: 20)
-                        
-                }
-                .padding(.all, 20)
-                .background(Color("materialGreen"))
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-            }
-        }
-        .padding()
     }
 }
 
