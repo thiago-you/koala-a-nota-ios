@@ -17,7 +17,6 @@
 		C3B5BCD02AC8C7AD00FC2D34 /* ItemReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCCF2AC8C7AD00FC2D34 /* ItemReview.swift */; };
 		C3B5BCD22AC8C7C300FC2D34 /* ItemReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCD12AC8C7C300FC2D34 /* ItemReviewModel.swift */; };
 		C3C5F9332AC9B444003B4082 /* ItemReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C5F9322AC9B444003B4082 /* ItemReviewView.swift */; };
-		C3FAF2312AD1963000ED8831 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = C3FAF2302AD1963000ED8831 /* FirebaseAppCheck */; };
 		C3FAF2332AD1963000ED8831 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C3FAF2322AD1963000ED8831 /* FirebaseAuth */; };
 		C3FAF2352AD1963000ED8831 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C3FAF2342AD1963000ED8831 /* FirebaseDatabase */; };
 		C3FAF2372AD1963000ED8831 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C3FAF2362AD1963000ED8831 /* FirebaseDatabaseSwift */; };
@@ -49,7 +48,6 @@
 			files = (
 				C3FAF2372AD1963000ED8831 /* FirebaseDatabaseSwift in Frameworks */,
 				C3FAF2352AD1963000ED8831 /* FirebaseDatabase in Frameworks */,
-				C3FAF2312AD1963000ED8831 /* FirebaseAppCheck in Frameworks */,
 				C3FAF2392AD1963000ED8831 /* FirebaseFirestore in Frameworks */,
 				C3FAF23D2AD1963000ED8831 /* FirebaseStorage in Frameworks */,
 				C3FAF2332AD1963000ED8831 /* FirebaseAuth in Frameworks */,
@@ -127,7 +125,6 @@
 			);
 			name = "Koala a Nota";
 			packageProductDependencies = (
-				C3FAF2302AD1963000ED8831 /* FirebaseAppCheck */,
 				C3FAF2322AD1963000ED8831 /* FirebaseAuth */,
 				C3FAF2342AD1963000ED8831 /* FirebaseDatabase */,
 				C3FAF2362AD1963000ED8831 /* FirebaseDatabaseSwift */,
@@ -412,11 +409,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C3FAF2302AD1963000ED8831 /* FirebaseAppCheck */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C3FAF22F2AD1963000ED8831 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAppCheck;
-		};
 		C3FAF2322AD1963000ED8831 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C3FAF22F2AD1963000ED8831 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
