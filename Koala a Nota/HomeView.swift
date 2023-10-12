@@ -6,16 +6,38 @@
 //
 
 import SwiftUI
+import Firebase
 import FirebaseAuth
 
 struct HomeView: View {
     let dataModel = ItemReviewModel()
+    
+    @State private var reviews: [ItemReview] = []
     
     func logout() {
         do {
             try Auth.auth().signOut()
         } catch {
             print(error)
+        }
+    }
+    
+    func fetchAllReviews() {
+        let db = Firestore.firestore()
+        
+        db.collection("reviews").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                var updatedReviews: [ItemReview] = []
+                for document in querySnapshot!.documents {
+                    let review = ItemReview(title: document.get("title") as! String, owner: document.get("owner") as! String, rating: document.get("rating") as! Int , review: document.get("review") as! String, type: 1)
+                    
+                    updatedReviews.append(review)
+                }
+                
+                self.reviews = updatedReviews
+            }
         }
     }
     
@@ -36,6 +58,8 @@ struct HomeView: View {
                     }
                 }
             }
+        }.onAppear {
+            fetchAllReviews()
         }
     }
     
@@ -69,7 +93,7 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top, 5)
                     .padding(.bottom, 20)
-                ForEach(dataModel.reviews) { item in
+                ForEach(reviews) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.title)
