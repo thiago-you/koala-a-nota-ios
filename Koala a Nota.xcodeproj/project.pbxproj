@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C39233C92AD873CF0076B846 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39233C82AD873CF0076B846 /* FirestoreManager.swift */; };
 		C3B5BCBB2AC8BC9300FC2D34 /* Koala_a_NotaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCBA2AC8BC9300FC2D34 /* Koala_a_NotaApp.swift */; };
 		C3B5BCBD2AC8BC9300FC2D34 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5BCBC2AC8BC9300FC2D34 /* ContentView.swift */; };
 		C3B5BCBF2AC8BC9400FC2D34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3B5BCBE2AC8BC9400FC2D34 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C39233C82AD873CF0076B846 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		C3B5BCB72AC8BC9300FC2D34 /* Koala a Nota.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Koala a Nota.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B5BCBA2AC8BC9300FC2D34 /* Koala_a_NotaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koala_a_NotaApp.swift; sourceTree = "<group>"; };
 		C3B5BCBC2AC8BC9300FC2D34 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				C3B5BCCF2AC8C7AD00FC2D34 /* ItemReview.swift */,
 				C3B5BCD12AC8C7C300FC2D34 /* ItemReviewModel.swift */,
+				C39233C82AD873CF0076B846 /* FirestoreManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				C3B5BCCB2AC8BD0700FC2D34 /* HomeView.swift in Sources */,
 				C3B5BCBD2AC8BC9300FC2D34 /* ContentView.swift in Sources */,
 				C3B5BCCD2AC8C10600FC2D34 /* LoginView.swift in Sources */,
+				C39233C92AD873CF0076B846 /* FirestoreManager.swift in Sources */,
 				C3B5BCBB2AC8BC9300FC2D34 /* Koala_a_NotaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

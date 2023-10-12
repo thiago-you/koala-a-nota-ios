@@ -12,8 +12,8 @@ import FirebaseAuth
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
+      FirebaseApp.configure()
+      return true
   }
 }
 
@@ -22,6 +22,7 @@ struct Koala_a_NotaApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject var firestoreManager = FirestoreManager()
     @State private var userStatus = UserStatus()
     
     func observeUserStatus() {
@@ -36,6 +37,7 @@ struct Koala_a_NotaApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(userStatus)
+                .environmentObject(firestoreManager)
                 .onAppear {
                     observeUserStatus()
                 }
