@@ -12,16 +12,14 @@ import FirebaseFirestore
 struct ItemReviewView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @EnvironmentObject var firestoreManager: FirestoreManager
+    @EnvironmentObject private var itemReview: ItemReview
     
     @State private var viewError: Any = ""
     
-    @State private var title = ""
-    @State private var owner = ""
-    @State private var review = ""
-    @State private var rating = "5"
-    
-    @State private var isNewItem = false
+    @State private var title = itemReview.title ?? ""
+    @State private var owner = itemReview.owner ?? ""
+    @State private var review = itemReview.review ?? ""
+    @State private var rating = itemReview.rating ?? "5"
     
     func salvar() {
         let review: ItemReview = ItemReview(title: title, owner: owner, rating: Int(rating) ?? 5, review: review, type: 1)
@@ -29,6 +27,7 @@ struct ItemReviewView: View {
         let db = Firestore.firestore()
         
         db.collection("reviews").addDocument(data: [
+            "id": review.id,
             "title": review.title,
             "owner": review.owner,
             "rating": review.rating,
@@ -41,6 +40,10 @@ struct ItemReviewView: View {
                 dismiss()
             }
         }
+    }
+
+    func delete() {
+
     }
     
     var body: some View {
@@ -97,9 +100,12 @@ struct ItemReviewView: View {
             }
         }
         .toolbar {
-            if !isNewItem {
+            if itemReview != nil {
                 ToolbarItem {
-                    NavigationLink(destination: ItemReviewView()) {
+                    Button {
+                        delete()
+                    }
+                    label: {
                         Label("Deletar Avaliação", systemImage: "trash")
                             .foregroundColor(.black)
                     }
