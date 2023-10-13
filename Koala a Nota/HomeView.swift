@@ -13,7 +13,8 @@ struct HomeView: View {
     let dataModel = ItemReviewModel()
     
     @State private var reviews: [ItemReview] = []
-    
+    @State private var selectedReview: ItemReview?
+
     func logout() {
         do {
             try Auth.auth().signOut()
@@ -52,7 +53,7 @@ struct HomeView: View {
             .navigationTitle("Home")
             .toolbar {
                 ToolbarItem {
-                    NavigationLink(destination: ItemReviewView()) {
+                    NavigationLink(destination: ItemReviewView(itemReview: nil)) {
                         Label("Nova Avaliação", systemImage: "plus")
                             .foregroundColor(.black)
                     }
@@ -93,29 +94,31 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top, 5)
                     .padding(.bottom, 20)
-                ForEach(reviews) { item in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(item.title)
-                                .font(.system(size: 20))
-                                .foregroundColor(.white)
-                                .bold()
-                            Text(item.owner)
-                                .font(.system(size: 15))
-                                .foregroundColor(.white)
-                                .padding(.top, 10)
-                            Text(item.review)
-                                .font(.system(size: 15))
-                                .foregroundColor(.white)
-                                .padding(.top, 1)
+                ForEach(reviews) { itemReview in
+                    NavigationLink(destination: ItemReviewView(itemReview: itemReview)) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(itemReview.title)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.white)
+                                    .bold()
+                                Text(itemReview.owner)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 10)
+                                Text(itemReview.review)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 1)
+                            }
+                            .padding(.all, 25)
                         }
-                        .padding(.all, 25)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(
+                            LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .leading, endPoint: .trailing)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .leading, endPoint: .trailing)
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
             }
         }

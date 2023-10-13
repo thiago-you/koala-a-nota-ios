@@ -22,7 +22,6 @@ struct Koala_a_NotaApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var firestoreManager = FirestoreManager()
     @State private var userStatus = UserStatus()
     
     func observeUserStatus() {
@@ -37,7 +36,6 @@ struct Koala_a_NotaApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(userStatus)
-                .environmentObject(firestoreManager)
                 .onAppear {
                     observeUserStatus()
                 }
