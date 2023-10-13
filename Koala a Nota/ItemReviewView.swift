@@ -30,8 +30,8 @@ struct ItemReviewView: View {
         _rating = State(initialValue: "\(itemReview?.rating ?? 5)")
     }
     
-    func salvar() {
-        let review: ItemReview = ItemReview(title: title, owner: owner, rating: Int(rating) ?? 5, review: review, type: 1)
+    func adicionar() {
+        let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: Int(rating) ?? 5, review: review, type: 1)
         
         let db = Firestore.firestore()
         
@@ -50,9 +50,31 @@ struct ItemReviewView: View {
             }
         }
     }
+    
+    func atualizar() {
+        let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: Int(rating) ?? 5, review: review, type: 1)
+        
+        let db = Firestore.firestore()
+        
+        db.collection("reviews").document(itemReview?.id ?? "").setData([
+            "title": review.title,
+            "owner": review.owner,
+            "rating": review.rating,
+            "review": review.review,
+            "type": review.type
+        ]) { err in
+            if err != nil {
+                viewError = "Nao foi possivel salvar os dados!"
+            } else {
+                dismiss()
+            }
+        }
+    }
 
     func delete() {
-
+        let db = Firestore.firestore()
+        db.collection("reviews").document(itemReview?.id ?? "").delete()
+        dismiss()
     }
     
     var body: some View {
@@ -95,7 +117,11 @@ struct ItemReviewView: View {
                 }
                 
                 Button {
-                    salvar()
+                    if itemReview == nil {
+                        adicionar()
+                    } else {
+                        atualizar()
+                    }
                 } label: {
                     Image(systemName: "sdcard.fill")
                         .foregroundColor(Color.white)

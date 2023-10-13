@@ -32,7 +32,7 @@ struct HomeView: View {
             } else {
                 var updatedReviews: [ItemReview] = []
                 for document in querySnapshot!.documents {
-                    let review = ItemReview(title: document.get("title") as! String, owner: document.get("owner") as! String, rating: document.get("rating") as! Int , review: document.get("review") as! String, type: 1)
+                    let review = ItemReview(id: document.documentID, title: document.get("title") as! String, owner: document.get("owner") as! String, rating: document.get("rating") as! Int , review: document.get("review") as! String, type: 1)
                     
                     updatedReviews.append(review)
                 }
