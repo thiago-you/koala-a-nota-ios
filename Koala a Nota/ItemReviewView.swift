@@ -15,6 +15,7 @@ struct ItemReviewView: View {
     let itemReview: ItemReview?
     
     @State private var viewError: Any = ""
+    @State private var isPresentingAlert: Bool = false
     
     @State private var title: String
     @State private var owner: String
@@ -31,6 +32,12 @@ struct ItemReviewView: View {
     }
     
     func adicionar() {
+        if title.isEmpty || owner.isEmpty || review.isEmpty {
+            viewError = "Por favor, verifique os dados informados!"
+            isPresentingAlert = true
+            return
+        }
+        
         let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: rating, review: review, type: 1)
         
         let db = Firestore.firestore()
@@ -44,7 +51,8 @@ struct ItemReviewView: View {
             "type": review.type
         ]) { err in
             if err != nil {
-                viewError = "Nao foi possivel salvar os dados!"
+                viewError = "Nao foi possivel adicionar os dados!"
+                isPresentingAlert = true
             } else {
                 dismiss()
             }
@@ -52,6 +60,12 @@ struct ItemReviewView: View {
     }
     
     func atualizar() {
+        if title.isEmpty || owner.isEmpty || review.isEmpty {
+            viewError = "Por favor, verifique os dados informados!"
+            isPresentingAlert = true
+            return
+        }
+        
         let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: rating, review: review, type: 1)
         
         let db = Firestore.firestore()
@@ -64,7 +78,8 @@ struct ItemReviewView: View {
             "type": review.type
         ]) { err in
             if err != nil {
-                viewError = "Nao foi possivel salvar os dados!"
+                viewError = "Nao foi possivel atualizar os dados!"
+                isPresentingAlert = true
             } else {
                 dismiss()
             }
@@ -126,29 +141,19 @@ struct ItemReviewView: View {
                 .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
                 .padding(.bottom, 10)
             Spacer()
-            Group {
-                if viewError as! String != "" {
-                    Text(viewError as! String)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.red)
-                        .padding(.bottom, 10)
+            Button(itemReview == nil ? "Adicionar" : "Atualizar") {
+                if itemReview == nil {
+                    adicionar()
                 } else {
-                    Text("")
-                        .padding(.bottom, 20)
+                    atualizar()
                 }
-                
-                Button(itemReview == nil ? "Adicionar" : "Atualizar") {
-                    if itemReview == nil {
-                        adicionar()
-                    } else {
-                        atualizar()
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color("darkPurple"))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.white)
+            .padding()
+            .background(Color("darkPurple"))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .alert(viewError as! String, isPresented: $isPresentingAlert) {
             }
         }
         .padding()

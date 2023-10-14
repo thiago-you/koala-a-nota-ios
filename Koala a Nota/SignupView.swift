@@ -12,6 +12,7 @@ struct SignupView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var viewError: Any = ""
+    @State private var isPresentingAlert: Bool = false
     
     @State private var email = ""
     @State private var senha = ""
@@ -20,6 +21,7 @@ struct SignupView: View {
     func signUp() {
         if email.isEmpty || senha.isEmpty {
             viewError = "Por favor, verifique os dados informados!"
+            isPresentingAlert = true
             return
         }
         
@@ -28,6 +30,7 @@ struct SignupView: View {
                 dismiss()
             } else {
                 viewError = "Nao foi possivel realizar o cadastro!"
+                isPresentingAlert = true
             }
         }
     }
@@ -50,17 +53,6 @@ struct SignupView: View {
                                     .font(.title)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.bottom, 30)
-                                
-                                if viewError as! String != "" {
-                                    Text(viewError as! String)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .foregroundColor(.red)
-                                        .padding(.bottom, 15)
-                                } else {
-                                    Text("")
-                                        .padding(.bottom, 30)
-                                }
-                                
                                 Text("E-mail:")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 TextField("Digite seu e-mail...", text: $email)
@@ -87,6 +79,8 @@ struct SignupView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .padding(.bottom, 10)
                                 .padding(.top, 50)
+                                .alert(viewError as! String, isPresented: $isPresentingAlert) {
+                                }
                                 Button(action: { dismiss() }) {
                                     HStack {
                                         Text("Ja possui uma conta?")

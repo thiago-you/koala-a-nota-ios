@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct LoginView: View {
     @State private var viewError: Any = ""
+    @State private var isPresentingAlert: Bool = false
     
     @State private var email = ""
     @State private var senha = ""
@@ -18,12 +19,14 @@ struct LoginView: View {
     func signIn() {
         if email.isEmpty || senha.isEmpty {
             viewError = "Por favor, verifique os dados informados!"
+            isPresentingAlert = true
             return
         }
         
         Auth.auth().signIn(withEmail: email, password: senha) { authResult, error in
             if error != nil {
                 viewError = "O login informado nao e valido!"
+                isPresentingAlert = true
             }
         }
     }
@@ -45,17 +48,6 @@ struct LoginView: View {
                                     .font(.title)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.bottom, 30)
-                                
-                                if viewError as! String != "" {
-                                    Text(viewError as! String)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .foregroundColor(.red)
-                                        .padding(.bottom, 15)
-                                } else {
-                                    Text("")
-                                        .padding(.bottom, 30)
-                                }
-                                
                                 Text("E-mail:")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 TextField("Digite seu e-mail...", text: $email)
@@ -82,6 +74,8 @@ struct LoginView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .padding(.bottom, 10)
                                 .padding(.top, 50)
+                                .alert(viewError as! String, isPresented: $isPresentingAlert) {
+                                }
                                 NavigationLink(destination: SignupView()) {
                                     HStack {
                                         Text("Não possui uma conta?")
