@@ -131,9 +131,9 @@ struct HomeView: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    .confirmationDialog("Tem certeza que deseja cadastrar os dados de demonstracao?",
+                    .confirmationDialog("Tem certeza que deseja cadastrar os dados de demonstração?",
                       isPresented: $isPresentingConfirmDemo) {
-                      Button("Cadastrar Demonstracao") {
+                      Button("Cadastrar Demonstração") {
                         demo()
                        }
                      }

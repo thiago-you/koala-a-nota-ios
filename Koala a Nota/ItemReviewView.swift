@@ -52,7 +52,7 @@ struct ItemReviewView: View {
             "type": review.type
         ]) { err in
             if err != nil {
-                viewError = "Nao foi possivel adicionar os dados!"
+                viewError = "Nao foi possível adicionar os dados!"
                 isPresentingAlert = true
             } else {
                 dismiss()
@@ -79,7 +79,7 @@ struct ItemReviewView: View {
             "type": review.type
         ]) { err in
             if err != nil {
-                viewError = "Nao foi possivel atualizar os dados!"
+                viewError = "Nao foi possível atualizar os dados!"
                 isPresentingAlert = true
             } else {
                 dismiss()

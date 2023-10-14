@@ -29,7 +29,7 @@ struct SignupView: View {
             if error == nil {
                 dismiss()
             } else {
-                viewError = "Nao foi possivel realizar o cadastro!"
+                viewError = "Nao foi possível realizar o cadastro!"
                 isPresentingAlert = true
             }
         }
