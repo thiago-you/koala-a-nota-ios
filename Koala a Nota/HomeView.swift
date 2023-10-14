@@ -70,22 +70,26 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+            VStack {
                 ScrollView(showsIndicators: false) {
                     headerView
                     listView
                 }
+                .padding(.top, 30)
             }
-            .navigationTitle("Home")
+            .navigationBarTitle("Home")
             .toolbar {
                 ToolbarItem {
                     NavigationLink(destination: ItemReviewView(itemReview: nil)) {
                         Label("Nova Avaliação", systemImage: "plus")
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                 }
             }
-        }.onAppear {
+            .toolbarBackground(Color("darkerPurple"), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+        }
+        .onAppear {
             fetchAllReviews()
         }
     }

@@ -78,6 +78,30 @@ struct ItemReviewView: View {
     }
     
     var body: some View {
+        NavigationView {
+            VStack {
+                contentView
+            }
+        }
+        .navigationBarTitle("Avaliação", displayMode: .inline)
+        .toolbar {
+            if itemReview != nil {
+                ToolbarItem {
+                    Button {
+                        delete()
+                    }
+                    label: {
+                        Label("Deletar", systemImage: "trash")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+        }
+        .toolbarBackground(Color("darkerPurple"), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+    }
+    
+    var contentView: some View {
         VStack {
             Text("Titulo:")
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -94,23 +118,23 @@ struct ItemReviewView: View {
             Text("Nota:")
                     .frame(maxWidth: .infinity, alignment: .leading)
             SelectedRatingView(rating: $rating)
-            Text("Avaliacao:")
+            Text("Avaliação:")
                 .frame(maxWidth: .infinity, alignment: .leading)
-            TextField("Escreva a avaliacao...", text: $review)
+            TextField("Escreva a avaliação...", text: $review, axis: .vertical)
+                .lineLimit(5...10)
                 .padding(.all)
                 .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
             Spacer()
-            
             Group {
                 if viewError as! String != "" {
                     Text(viewError as! String)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(.red)
-                        .padding(.bottom, 15)
+                        .padding(.bottom, 10)
                 } else {
                     Text("")
-                        .padding(.bottom, 30)
+                        .padding(.bottom, 20)
                 }
                 
                 Button(itemReview == nil ? "Adicionar" : "Atualizar") {
@@ -125,19 +149,6 @@ struct ItemReviewView: View {
                 .padding()
                 .background(Color("darkPurple"))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
-            }
-        }
-        .toolbar {
-            if itemReview != nil {
-                ToolbarItem {
-                    Button {
-                        delete()
-                    }
-                    label: {
-                        Label("Deletar Avaliação", systemImage: "trash")
-                            .foregroundColor(.black)
-                    }
-                }
             }
         }
         .padding()

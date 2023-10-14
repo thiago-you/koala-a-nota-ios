@@ -67,24 +67,11 @@ struct LoginView: View {
                                 HStack {
                                     Text("Senha:")
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                    Spacer()
-                                    Button("Recuperar Senha") {
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
                                 SecureField("Digite sua senha...", text: $senha)
                                     .padding(.all)
                                     .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
                                     .padding(.bottom, 20)
-                                HStack {
-                                    Text("Lembrar minha senha")
-                                        .font(.caption)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Spacer()
-                                    Toggle("", isOn: $rememberPassword)
-                                }
-                                .padding(.bottom, 30)
                                 Button(action: { signIn() }) {
                                     Text("Entrar")
                                 }
@@ -94,6 +81,7 @@ struct LoginView: View {
                                 .background(Color("darkerPurple"))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .padding(.bottom, 10)
+                                .padding(.top, 50)
                                 NavigationLink(destination: SignupView()) {
                                     HStack {
                                         Text("Não possui uma conta?")
@@ -104,7 +92,6 @@ struct LoginView: View {
                                             .foregroundColor(.blue)
                                     }
                                 }
-                                .navigationTitle("Login")
                                 .padding(.bottom, 10)
                             }
                             .padding()
@@ -118,6 +105,7 @@ struct LoginView: View {
                     )
                 }
             }
+            .navigationBarTitle("Login", displayMode: .inline)
         }
     }
 }

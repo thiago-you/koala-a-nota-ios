@@ -41,6 +41,7 @@ struct SignupView: View {
                         Image("profile")
                             .resizable()
                             .frame(width: 180, height: 180)
+                            .padding(.top, 50)
                         Spacer()
                         ZStack {
                             Color.white.ignoresSafeArea()
@@ -75,15 +76,7 @@ struct SignupView: View {
                                 SecureField("Digite sua senha...", text: $senha)
                                     .padding(.all)
                                     .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                                    .padding(.bottom, 20)
-                                HStack {
-                                    Text("Lembrar minha senha")
-                                        .font(.caption)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Spacer()
-                                    Toggle("", isOn: $rememberPassword)
-                                }
-                                .padding(.bottom, 30)
+                                    .padding(.bottom, 20)                                .padding(.bottom, 30)
                                 Button("Criar conta") {
                                     signUp()
                                 }
@@ -93,6 +86,7 @@ struct SignupView: View {
                                 .background(Color("darkerPurple"))
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .padding(.bottom, 10)
+                                .padding(.top, 50)
                                 Button(action: { dismiss() }) {
                                     HStack {
                                         Text("Ja possui uma conta?")
@@ -117,6 +111,7 @@ struct SignupView: View {
                 }
             }
         }
+        .navigationBarTitle("Cadastrar", displayMode: .inline)
     }
 }
 
