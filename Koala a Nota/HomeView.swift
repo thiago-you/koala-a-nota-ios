@@ -161,58 +161,102 @@ struct HomeView: View {
                     .padding(.top, 5)
                     .padding(.bottom, 20)
                 ForEach(reviews) { itemReview in
-                    NavigationLink(destination: ItemReviewView(itemReview: itemReview)) {
-                        HStack {
-                            ZStack {
-                                VStack(alignment: .leading) {
-                                    Text(itemReview.title)
-                                        .font(.system(size: 20))
-                                        .foregroundColor(.white)
-                                        .bold()
-                                    Text(itemReview.owner)
-                                        .font(.system(size: 15))
-                                        .foregroundColor(.white)
-                                        .padding(.top, 10)
-                                    Text(itemReview.review)
-                                        .font(.system(size: 15))
-                                        .foregroundColor(.white)
-                                        .padding(.top, 1)
+                    ZStack {
+                        NavigationLink(destination: ItemReviewView(itemReview: itemReview)) {
+                            HStack {
+                                ZStack {
+                                    VStack(alignment: .leading) {
+                                        Text(itemReview.title)
+                                            .font(.system(size: 20))
+                                            .foregroundColor(.white)
+                                            .bold()
+                                        Text(itemReview.owner)
+                                            .font(.system(size: 15))
+                                            .foregroundColor(.white)
+                                            .padding(.top, 10)
+                                        Text(itemReview.review)
+                                            .font(.system(size: 15))
+                                            .foregroundColor(.white)
+                                            .padding(.top, 1)
+                                    }
+                                    .padding(.all, 25)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    HStack {
+                                        Spacer()
+                                        Image(systemName: "arrow.right")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(Color.white)
+                                            .padding(.trailing, 20)
+                                        
+                                    }
+                                    VStack {
+                                        Spacer()
+                                        Image(systemName: "takeoutbag.and.cup.and.straw.fill")
+                                            .resizable()
+                                            .frame(width: 65, height: 60)
+                                            .foregroundColor(Color.white)
+                                            .opacity(0.4)
+                                            .padding(.trailing, 20)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
-                                .padding(.all, 25)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                HStack {
-                                    Spacer()
-                                    Image(systemName: "arrow.right")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .foregroundColor(Color.white)
-                                        .padding(.trailing, 20)
-                                    
-                                }
-                                VStack {
-                                    Spacer()
-                                    Image(systemName: "takeoutbag.and.cup.and.straw.fill")
-                                        .resizable()
-                                        .frame(width: 65, height: 60)
-                                        .foregroundColor(Color.white)
-                                        .opacity(0.4)
-                                        .padding(.trailing, 20)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(
+                                LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .leading, endPoint: .trailing)
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .padding(.bottom, 20)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .leading, endPoint: .trailing)
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .padding(.bottom, 20)
+                        RatingView(review: itemReview)
                     }
                 }
             }
         }
         .padding()
         .background(Color.white)
+    }
+}
+
+struct RatingView: View {
+    var review: ItemReview
+    
+    init(review: ItemReview) {
+        self.review = review
+    }
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            VStack {
+                HStack {
+                    StarView(filled: review.rating >= 1)
+                    StarView(filled: review.rating >= 2)
+                    StarView(filled: review.rating >= 3)
+                    StarView(filled: review.rating >= 4)
+                    StarView(filled: review.rating >= 5)
+                }
+                .padding(.trailing, 10)
+                Spacer()
+            }
+        }
+        .padding(.top, -13)
+    }
+}
+
+struct StarView: View {
+    var filled: Bool = true
+    
+    init(filled: Bool) {
+        self.filled = filled
+    }
+    
+    var body: some View {
+        Image(systemName: "star.fill")
+            .resizable()
+            .frame(width: 30, height: 30)
+            .foregroundColor(filled ? Color.yellow : Color.gray)
     }
 }
 

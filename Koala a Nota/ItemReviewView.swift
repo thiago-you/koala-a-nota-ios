@@ -134,7 +134,7 @@ struct ItemReviewView: View {
                 .frame(maxWidth: .infinity)
                 .foregroundColor(.white)
                 .padding()
-                .background(Color("materialGreen"))
+                .background(Color("darkPurple"))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             }
         }
