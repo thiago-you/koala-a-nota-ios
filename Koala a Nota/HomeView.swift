@@ -198,19 +198,19 @@ struct ReviewCardView: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination: ItemReviewView(itemReview: itemReview)) {
+            NavigationLink(destination: ItemReviewView(itemReview: review)) {
                 HStack {
                     ZStack {
                         VStack(alignment: .leading) {
-                            Text(itemReview.title)
+                            Text(review.title)
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
                                 .bold()
-                            Text(itemReview.owner)
+                            Text(review.owner)
                                 .font(.system(size: 15))
                                 .foregroundColor(.white)
                                 .padding(.top, 10)
-                            Text(itemReview.review)
+                            Text(review.review)
                                 .font(.system(size: 15))
                                 .foregroundColor(.white)
                                 .padding(.top, 1)
