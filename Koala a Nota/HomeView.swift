@@ -15,6 +15,9 @@ struct HomeView: View {
     @State private var reviews: [ItemReview] = []
     @State private var selectedReview: ItemReview?
 
+    @State private var isPresentingConfirmDemo: Bool = false
+    @State private var isPresentingConfirmClear: Bool = false
+    
     func logout() {
         do {
             try Auth.auth().signOut()
@@ -113,7 +116,7 @@ struct HomeView: View {
             HStack {
                 VStack {
                     Button {
-                        demo()
+                        isPresentingConfirmDemo = true
                     }
                     label: {
                         VStack {
@@ -128,11 +131,17 @@ struct HomeView: View {
                                 .foregroundColor(.black)
                         }
                     }
+                    .confirmationDialog("Tem certeza que deseja cadastrar os dados de demonstracao?",
+                      isPresented: $isPresentingConfirmDemo) {
+                      Button("Cadastrar Demonstracao") {
+                        demo()
+                       }
+                     }
                 }
                 .padding(.trailing, 20)
                 VStack {
                     Button {
-                        clear()
+                        isPresentingConfirmClear = true
                     }
                     label: {
                         VStack {
@@ -147,6 +156,12 @@ struct HomeView: View {
                                 .foregroundColor(.black)
                         }
                     }
+                    .confirmationDialog("Tem certeza que deseja deletar todos os itens?",
+                      isPresented: $isPresentingConfirmClear) {
+                      Button("Limpar Dados") {
+                        clear()
+                       }
+                     }
                 }
             }
             .padding(.trailing, 15)

@@ -16,6 +16,7 @@ struct ItemReviewView: View {
     
     @State private var viewError: Any = ""
     @State private var isPresentingAlert: Bool = false
+    @State private var isPresentingConfirmDelete: Bool = false
     
     @State private var title: String
     @State private var owner: String
@@ -103,11 +104,17 @@ struct ItemReviewView: View {
             if itemReview != nil {
                 ToolbarItem {
                     Button {
-                        delete()
+                        isPresentingConfirmDelete = true
                     }
                     label: {
                         Label("Deletar", systemImage: "trash")
                             .foregroundColor(.white)
+                    }
+                    .confirmationDialog("Tem certeza que deseja deletar este item?",
+                                        isPresented: $isPresentingConfirmDelete) {
+                        Button("Deletar") {
+                            delete()
+                        }
                     }
                 }
             }
