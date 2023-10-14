@@ -26,7 +26,7 @@ struct HomeView: View {
     func fetchAllReviews() {
         let db = Firestore.firestore()
         
-        db.collection("reviews").getDocuments { (querySnapshot, error) in
+        db.collection("reviews").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -37,8 +37,34 @@ struct HomeView: View {
                     updatedReviews.append(review)
                 }
                 
-                self.reviews = updatedReviews
+                DispatchQueue.main.async {
+                    self.reviews = updatedReviews
+                }
             }
+        }
+    }
+    
+    func demo() {
+        clear()
+        
+        dataModel.reviews.forEach { review in
+            let db = Firestore.firestore()
+            
+            db.collection("reviews").document().setData([
+                "title": review.title,
+                "owner": review.owner,
+                "rating": review.rating,
+                "review": review.review,
+                "type": review.type
+            ])
+        }
+    }
+    
+    func clear() {
+        let db = Firestore.firestore()
+            
+        reviews.forEach { review in
+            db.collection("reviews").document(review.id).delete()
         }
     }
     
@@ -80,6 +106,46 @@ struct HomeView: View {
                     .foregroundColor(.black)
             }
             Spacer()
+            HStack {
+                VStack {
+                    Button {
+                        demo()
+                    }
+                    label: {
+                        VStack {
+                            Image(systemName: "note.text.badge.plus")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(Color("darkerPurple"))
+                                .padding(.bottom, 5)
+                            Text("Demo")
+                                .bold()
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
+                    }
+                }
+                .padding(.trailing, 20)
+                VStack {
+                    Button {
+                        clear()
+                    }
+                    label: {
+                        VStack {
+                            Image(systemName: "trash.fill")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(Color("darkerPurple"))
+                                .padding(.bottom, 5)
+                            Text("Limpar")
+                                .bold()
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
+                    }
+                }
+            }
+            .padding(.trailing, 15)
         }
         .frame(height: 50)
         .padding()
@@ -97,27 +163,50 @@ struct HomeView: View {
                 ForEach(reviews) { itemReview in
                     NavigationLink(destination: ItemReviewView(itemReview: itemReview)) {
                         HStack {
-                            VStack(alignment: .leading) {
-                                Text(itemReview.title)
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.white)
-                                    .bold()
-                                Text(itemReview.owner)
-                                    .font(.system(size: 15))
-                                    .foregroundColor(.white)
-                                    .padding(.top, 10)
-                                Text(itemReview.review)
-                                    .font(.system(size: 15))
-                                    .foregroundColor(.white)
-                                    .padding(.top, 1)
+                            ZStack {
+                                VStack(alignment: .leading) {
+                                    Text(itemReview.title)
+                                        .font(.system(size: 20))
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text(itemReview.owner)
+                                        .font(.system(size: 15))
+                                        .foregroundColor(.white)
+                                        .padding(.top, 10)
+                                    Text(itemReview.review)
+                                        .font(.system(size: 15))
+                                        .foregroundColor(.white)
+                                        .padding(.top, 1)
+                                }
+                                .padding(.all, 25)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "arrow.right")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(Color.white)
+                                        .padding(.trailing, 20)
+                                    
+                                }
+                                VStack {
+                                    Spacer()
+                                    Image(systemName: "takeoutbag.and.cup.and.straw.fill")
+                                        .resizable()
+                                        .frame(width: 65, height: 60)
+                                        .foregroundColor(Color.white)
+                                        .opacity(0.4)
+                                        .padding(.trailing, 20)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
-                            .padding(.all, 25)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(
                             LinearGradient(gradient: Gradient(colors: [Color("lightPurple"), Color("darkPurple"), Color("darkerPurple")]), startPoint: .leading, endPoint: .trailing)
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .padding(.bottom, 20)
                     }
                 }
             }

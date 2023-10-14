@@ -125,7 +125,7 @@ struct ItemReviewView: View {
                 } label: {
                     Image(systemName: "sdcard.fill")
                         .foregroundColor(Color.white)
-                    if itemReview != nil {
+                    if itemReview == nil {
                         Text("Adicionar")
                     } else {
                         Text("Atualizar")
