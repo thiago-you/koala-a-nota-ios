@@ -19,7 +19,7 @@ struct ItemReviewView: View {
     @State private var title: String
     @State private var owner: String
     @State private var review: String
-    @State private var rating: String
+    @State var rating: Int
     
     init(itemReview: ItemReview?) {
         self.itemReview = itemReview
@@ -27,11 +27,11 @@ struct ItemReviewView: View {
         _title = State(initialValue: itemReview?.title ?? "")
         _owner = State(initialValue: itemReview?.owner ?? "")
         _review = State(initialValue: itemReview?.review ?? "")
-        _rating = State(initialValue: "\(itemReview?.rating ?? 5)")
+        _rating = State(initialValue: itemReview?.rating ?? 5)
     }
     
     func adicionar() {
-        let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: Int(rating) ?? 5, review: review, type: 1)
+        let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: rating, review: review, type: 1)
         
         let db = Firestore.firestore()
         
@@ -52,7 +52,7 @@ struct ItemReviewView: View {
     }
     
     func atualizar() {
-        let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: Int(rating) ?? 5, review: review, type: 1)
+        let review: ItemReview = ItemReview(id: UUID().uuidString, title: title, owner: owner, rating: rating, review: review, type: 1)
         
         let db = Firestore.firestore()
         
@@ -92,11 +92,8 @@ struct ItemReviewView: View {
                 .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
                 .padding(.bottom, 20)
             Text("Nota:")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            TextField("Qual a nota...", text: $rating)
-                .padding(.all)
-                .overlay(RoundedRectangle(cornerRadius: 8.0).strokeBorder(Color("lightPurple"), style: StrokeStyle(lineWidth: 1.0)))
-                .padding(.bottom, 20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            SelectedRatingView(rating: $rating)
             Text("Avaliacao:")
                 .frame(maxWidth: .infinity, alignment: .leading)
             TextField("Escreva a avaliacao...", text: $review)
@@ -116,19 +113,11 @@ struct ItemReviewView: View {
                         .padding(.bottom, 30)
                 }
                 
-                Button {
+                Button(itemReview == nil ? "Adicionar" : "Atualizar") {
                     if itemReview == nil {
                         adicionar()
                     } else {
                         atualizar()
-                    }
-                } label: {
-                    Image(systemName: "sdcard.fill")
-                        .foregroundColor(Color.white)
-                    if itemReview == nil {
-                        Text("Adicionar")
-                    } else {
-                        Text("Atualizar")
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -152,6 +141,51 @@ struct ItemReviewView: View {
             }
         }
         .padding()
+    }
+}
+
+struct SelectedRatingView: View {
+    @Binding var rating: Int
+
+    var body: some View {
+        HStack {
+            SelectableStarView(rating: $rating, value: 1)
+            Spacer()
+            SelectableStarView(rating: $rating, value: 2)
+            Spacer()
+            SelectableStarView(rating: $rating, value: 3)
+            Spacer()
+            SelectableStarView(rating: $rating, value: 4)
+            Spacer()
+            SelectableStarView(rating: $rating, value: 5)
+        }
+        .padding(.top, 10)
+        .padding(.leading, 20)
+        .padding(.trailing, 20)
+        .padding(.bottom, 20)
+    }
+}
+
+struct SelectableStarView: View {
+    @Binding var rating: Int
+    
+    var value: Int
+    
+    init(rating: Binding<Int>, value: Int) {
+        self._rating = rating
+        self.value = value
+    }
+    
+    var body: some View {
+        Button {
+            rating = value
+        }
+        label: {
+            Image(systemName: "star.fill")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(rating >= value ? Color.yellow : Color.gray)
+        }
     }
 }
 
