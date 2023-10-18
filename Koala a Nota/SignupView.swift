@@ -16,7 +16,6 @@ struct SignupView: View {
     
     @State private var email = ""
     @State private var senha = ""
-    @State private var rememberPassword = true
     
     func signUp() {
         if email.isEmpty || senha.isEmpty {
@@ -29,7 +28,7 @@ struct SignupView: View {
             if error == nil {
                 dismiss()
             } else {
-                viewError = "Nao foi possível realizar o cadastro!"
+                viewError = "Não foi possível realizar o cadastro. Por favor, verifique os dados informados!"
                 isPresentingAlert = true
             }
         }

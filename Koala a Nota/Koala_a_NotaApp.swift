@@ -27,7 +27,9 @@ struct Koala_a_NotaApp: App {
         userStatus.isLogged = Auth.auth().currentUser?.uid != nil
         
         Auth.auth().addStateDidChangeListener { auth, user in
-            userStatus.isLogged = user != nil
+            DispatchQueue.main.async {
+                userStatus.isLogged = user != nil
+            }
         }
     }
     

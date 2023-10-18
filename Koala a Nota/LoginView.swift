@@ -14,7 +14,6 @@ struct LoginView: View {
     
     @State private var email = ""
     @State private var senha = ""
-    @State private var rememberPassword = true
     
     func signIn() {
         if email.isEmpty || senha.isEmpty {
@@ -25,7 +24,7 @@ struct LoginView: View {
         
         Auth.auth().signIn(withEmail: email, password: senha) { authResult, error in
             if error != nil {
-                viewError = "O login informado nao e valido!"
+                viewError = "O login informado não é valido. Por favor, verifique os dados informados!"
                 isPresentingAlert = true
             }
         }
