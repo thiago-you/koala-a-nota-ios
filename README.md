@@ -1,5 +1,5 @@
-# iOS + Firebase - PUCPR 2023 - Koala a Nota?
-App avaliador de pedidos de comida para o projeto da PÓS PUCPR, utilizando SwiftUI e Firebase (Authentication + Firestore) 
+# iOS + Firebase - PUCPR 2023
+Koala a Nota? - App avaliador de pedidos de comida para o projeto da PÓS PUCPR, utilizando SwiftUI e Firebase (Authentication + Firestore) 
 
 ### Interface
 <p align="center" width="100%">
